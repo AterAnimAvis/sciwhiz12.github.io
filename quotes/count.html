@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="user-popups.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico" />
+    <title>Quotes Count</title>
+  </head>
+  <body>
+    <div class="header">
+      <a href="/"
+        ><img src="/assets/icon/home.svg" class="home" title="Homepage"
+      /></a>
+      <h2>
+        Quotes on
+        <img
+          class="server_icon"
+          src="https://cdn.discordapp.com/icons/313125603924639766/42fdc634eac27c976bed5563c22a2056.webp"
+          alt="server icon"
+        /><span class="server_title"> The Forge Project</span>
+      </h2>
+    </div>
+    <div class="error" id="loading_error" style="display: none">
+      <div class="error_popup">
+        Error loading quotes! <br />
+        Please try again.
+      </div>
+    </div>
+    <table id="counts">
+      <tr class="table_header">
+        <th>Quotee (@)</th>
+        <th>Number of Quotes (#)</th>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">154</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">46</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">39</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">34</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">28</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">28</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">27</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">16</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">15</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">14</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">14</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">12</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">11</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">11</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">10</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">7</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">6</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">6</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">6</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">5</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">5</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">4</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">4</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">3</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">3</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">3</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">2</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+      <tr>
+        <td class="collapse" tabindex="1"></td>
+        <td class="count">1</td>
+      </tr>
+    </table>
+    <div class="footer">
+      This page is not affiliated with Discord nor with The Forge Project.
+      <br />
+      It is authored by <span class="white">sciwhiz12#1286</span>, the quote
+      historian of The Forge Project&#x27;s Discord.<br />
+      This page is manually updated by the author.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+:root {
+    --hover-color: #04040512;
+    --link-color: #7777ff;
+    --small-text-color: #72767d;
+    --content-color: #dcddde;
+}
+
+body {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.flex {
+    background-color: var(--primary-background-color);
+    flex: 1 1 auto;
+    display: flex;
+    margin: auto;
+    overflow: auto;
+    width: 80vw;
+    flex-flow: column nowrap;
+    scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .flex {
+        scroll-behavior: auto;
+    }
+}
+
+.header {
+    flex: 0 1 auto;
+    background-color: var(--tertiary-background-color);
+    height: 5rem;
+    font-size: 1.5rem;
+    padding: 0.3rem 0 0.1rem 0;
+    line-height: 2.2rem;
+}
+
+.quote {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 8px 0px;
+    padding-right: 6px;
+}
+
+.quote:hover,
+.quote:target,
+.hover {
+    background-color: var(--hover-color);
+}
+
+.quote .count {
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin-right: 1rem;
+    text-align: center;
+    flex: 0 0 2.25em;
+    color: inherit;
+    text-decoration: none;
+}
+
+.quote a.count:hover {
+    text-decoration-line: underline;
+}
+
+.quote .avatar {
+    flex: 0 0 40px;
+    border-radius: 100%;
+    width: 40px;
+    margin-right: 1rem;
+    align-self: flex-start;
+}
+
+.quote .content {
+    flex: 1 1 auto;
+    color: var(--content-color);
+    font-weight: normal;
+}
+
+.quote .content .break-all {
+    word-break: break-all;
+}
+
+.quote .name {
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.quote .side-text {
+    color: var(--small-text-color);
+    font-size: 0.8rem;
+    font-weight: normal;
+    line-height: 1.1rem;
+}
+
+.quote .side-text a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+p {
+    margin-bottom: 4px;
+}
+
+[class*="collapse-"]:hover>span:nth-child(1) {
+    text-decoration: underline currentColor;
+}
+
+[class*="collapse-"] {
+    width: fit-content;
+    cursor: pointer;
+}
+
+[class*="collapse-"]:focus {
+    outline: none;
+}
+
+[class*="collapse-"]~.content>.popup {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.collapse-avatar:focus~.content>.popup,
+.collapse-name:focus~.popup {
+    transition: 0.2s;
+    opacity: 1;
+    pointer-events: unset;
+    left: 50%
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.meta-text {
+    font-style: oblique;
+    color: #ddd;
+}

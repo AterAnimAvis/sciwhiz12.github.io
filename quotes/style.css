@@ -1,0 +1,190 @@
+@import url(https://db.onlinewebfonts.com/c/3d18e5b9c54ab7a3fecf7d36dc931eb6?family=Whitney);
+
+:root {
+    --primary-background-color: #36393F;
+    --secondary-background-color: #2F3136;
+    --tertiary-background-color: #202225;
+    --text-color: #d3c8c8;
+}
+
+* {
+    text-rendering: optimizeLegibility;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%
+}
+
+body {
+    background-color: var(--primary-background-color);
+    color: var(--text-color);
+    font-family: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.375rem;
+    font-size: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100%;
+}
+
+.header,
+header {
+    flex: 0 1 auto;
+    background-color: var(--tertiary-background-color);
+    height: 1.7em;
+    font-style: italic;
+    text-align: center;
+    padding: 8px 0 12px 0;
+}
+
+.home {
+    filter: invert(100%) sepia(0%) saturate(3555%) hue-rotate(326deg) brightness(121%) contrast(87%);
+    width: 24px;
+    float: left;
+    margin: 4px;
+    margin-left: 8px;
+}
+
+.footer,
+footer {
+    flex: 0 1 2em;
+    text-align: center;
+    background-color: var(--tertiary-background-color);
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+    padding: 4px 0;
+}
+
+.server_icon {
+    width: 2rem;
+    vertical-align: middle;
+    border-radius: 100%;
+}
+
+.server_title {
+    font-style: normal;
+}
+
+table {
+    flex: 1 0 auto;
+    text-align: center;
+    margin: auto;
+    border-top: var(--secondary-background-color) solid 2px;
+    border-bottom: var(--secondary-background-color) solid 2px;
+    border-spacing: 0;
+}
+
+.table_header>th {
+    border-bottom: var(--secondary-background-color) solid 1px;
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary-background-color);
+}
+
+tr {
+    max-height: 21px;
+    height: 21px;
+}
+
+.non_user {
+    color: #aaaaaa;
+    font-style: italic;
+}
+
+.tag {
+    font-weight: 400;
+    background-color: #7289da;
+    color: #fff;
+    text-transform: uppercase;
+    vertical-align: top;
+    text-align: center;
+    font-size: .625rem;
+    height: .9375rem;
+    padding: .1rem .275rem;
+    margin-top: .075em;
+    border-radius: .1875rem;
+    margin-left: .25rem;
+    line-height: 1.375rem;
+    text-decoration-line: none;
+}
+
+.role_default {
+    color: #b9bbbe;
+}
+
+.white {
+    color: white;
+}
+
+mention {
+    background-color: rgba(114, 137, 218, .1);
+    color: #7289da;
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: 500;
+    position: relative;
+}
+
+mention:hover {
+    color: #fff;
+    background-color: #7289da;
+}
+
+code {
+    width: auto;
+    height: auto;
+    padding: .2em;
+    margin: -.2em 0;
+    border-radius: 3px;
+    font-size: 85%;
+    font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+    line-height: 1.125rem;
+    white-space: pre-wrap;
+    background: var(--secondary-background-color);
+    color: var(--text-color);
+}
+
+em {
+    font: inherit;
+    font-style: italic;
+}
+
+strong {
+    font-weight: 700;
+}
+
+.error {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.error_popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #660000;
+    color: var(--content-color);
+    margin: auto;
+    padding: 2em;
+    position: fixed;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    border-radius: 1em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.emote {
+    width: 18px;
+    vertical-align: sub;
+    object-fit: contain;
+}
