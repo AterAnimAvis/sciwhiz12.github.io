@@ -1,10 +1,10 @@
 fetch("data.json")
     .then(req => req.json())
-    .then(data => {
+    .then(/** @param data : Quotes */ data => {
         const container = document.getElementById("quotes")
-        var roles = parseRoles(data.roles)
+        const roles = parseRoles(data.roles);
 
-        var quotes = data.quotes
+        const quotes = data.quotes;
         for (let i = 0; i < quotes.length; i++) {
             const quote = quotes[i];
             if (!quote || !quote.user) {
@@ -21,7 +21,7 @@ fetch("data.json")
             })
         }
 
-        var id = window.location.hash
+        const id = window.location.hash;
         removeAllHovers()
         if (id && id.length) {
             const element = document.getElementById(id.substr(1))
@@ -48,6 +48,10 @@ function removeAllHovers() {
     }
 }
 
+/**
+ * @param number : number
+ * @return {HTMLElement}
+ */
 function createNoQuote(number) {
     const quoteDiv = document.createElement("div")
     quoteDiv.className = "quote"
@@ -70,10 +74,17 @@ function createNoQuote(number) {
     return quoteDiv;
 }
 
+/**
+ * @param data : Quotes
+ * @param roles : Role[]
+ * @param number : number
+ * @param quote : Quote
+ * @return {HTMLElement}
+ */
 function createQuote(data, roles, number, quote) {
     const user = quote.user
     const text = quote.text
-    var userdata = null
+    let userdata = null;
     if (data.users.hasOwnProperty(user)) {
         userdata = data.users[user]
     }
@@ -87,7 +98,7 @@ function createQuote(data, roles, number, quote) {
     numberElement.href = numberElement.innerText = "#" + number
 
     const avatar = quoteDiv.appendChild(document.createElement("img"))
-    avatar.classList = userdata ? "collapse-avatar avatar" : "avatar"
+    avatar.className = userdata ? "collapse-avatar avatar" : "avatar"
     avatar.tabIndex = 1
     if (userdata) {
         avatar.src = userdata.avatar
@@ -98,7 +109,7 @@ function createQuote(data, roles, number, quote) {
     content.className = "content"
 
     const nameDiv = content.appendChild(document.createElement("div"))
-    nameDiv.classList = userdata ? "collapse-name name" : "name"
+    nameDiv.className = userdata ? "collapse-name name" : "name"
     nameDiv.tabIndex = 1
 
     const userSpan = nameDiv.appendChild(document.createElement("span"))
