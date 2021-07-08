@@ -1,131 +1,87 @@
+const DIV = "div";
+const SPAN = "span";
+const IMG = "img";
+function create(type, className, parent = null, content = null) {
+    const element = document.createElement(type);
+    if (className)
+        element.className = className;
+    if (content)
+        element.innerHTML = content;
+    parent === null || parent === void 0 ? void 0 : parent.appendChild(element);
+    return element;
+}
+function createDiv(className, parent = null, content = null) {
+    return create(DIV, className, parent, content);
+}
+function createSpan(className, parent = null, content = null) {
+    return create(SPAN, className, parent, content);
+}
+function createImg(className, parent = null) {
+    return create(IMG, className, parent);
+}
 /**
  * Creates a Popup for a user
- * @param user : string
- * @param roles : Role[]
- * @param userdata : User|null
- * @returns {HTMLElement}
  */
 function createPopup(user, roles, userdata) {
     // The main div for the popup
-    const popupDiv = document.createElement("div")
-    popupDiv.className = "popup"
-
+    const popupDiv = createDiv("popup");
     // The top part of the poppup, for the user's info (name, discriminator, etc)
-    const popupHead = popupDiv.appendChild(document.createElement("div"))
-    popupHead.className = "popup_head"
-
+    const popupHead = createDiv("popup_head", popupDiv);
     // Part of the popup head, the user's avatar
-    const avatar = popupHead.appendChild(document.createElement("img"))
-    avatar.className = "popup_avatar"
-    avatar.src = userdata?.avatar
-    avatar.alt = "avatar for " + user
-
+    const avatar = createImg("popup_avatar", popupHead);
+    avatar.src = userdata === null || userdata === void 0 ? void 0 : userdata.avatar;
+    avatar.alt = "avatar for " + user;
+    // If there is a nickname, have that in bold otherwise use the username
+    const name = (userdata === null || userdata === void 0 ? void 0 : userdata.nickname) || (userdata === null || userdata === void 0 ? void 0 : userdata.username);
+    createDiv("popup_bold", popupHead, name);
+    // And the discriminator as smaller text (with username if there's a nick)
+    const discriminator = ((userdata === null || userdata === void 0 ? void 0 : userdata.nickname) ? userdata.username : "") + "#" + (userdata === null || userdata === void 0 ? void 0 : userdata.discriminator);
+    const smaller = createSpan("popup_smaller", popupHead, discriminator);
     // An optional tag, attached to the name of the user (such as for bots)
-    let tagSpan = null;
-    if (userdata?.tag) {
-        tagSpan = document.createElement("span")
-        tagSpan.className = "tag"
-        tagSpan.innerHTML = userdata.tag
-    }
-
-    const discriminator = "#" + userdata.discriminator
-    if (userdata?.nickname) {
-        // If there is a nickname, have that in bold
-        const bold = popupHead.appendChild(document.createElement("div"))
-        bold.className = "popup_bold"
-        bold.innerHTML = userdata.nickname
-
-        // And the discriminator as smaller text
-        const smaller = popupHead.appendChild(document.createElement("span"))
-        smaller.className = "popup_smaller"
-        smaller.innerHTML = userdata.username + discriminator
-
-        // Append the tag to the userinfo, if any
-        if (tagSpan) {
-            smaller.appendChild(tagSpan)
-        }
-    } else {
-        // Make a container div for the userinfo
-        const div = popupHead.appendChild(document.createElement("div"))
-
-        // Have the username in bold
-        const bold = div.appendChild(document.createElement("span"))
-        bold.className = "popup_bold"
-        bold.innerHTML = userdata.username
-
-        // And the discriminator as regular text
-        div.appendChild(document.createTextNode(discriminator))
-
-        // Append the tag to the userinfo, if any
-        if (tagSpan) {
-            div.appendChild(tagSpan)
-        }
-    }
-
+    if (userdata === null || userdata === void 0 ? void 0 : userdata.tag)
+        createSpan("tag", smaller, userdata.tag);
     // The rest of the popup (the body)
-    const popupBody = popupDiv.appendChild(document.createElement("div"))
-    popupBody.className = "popup_body"
-
+    const popupBody = createDiv("popup_body", popupDiv);
     // The roles of the user
-    const roleHeader = popupBody.appendChild(document.createElement("div"))
-    roleHeader.className = "popup_body_header"
-    const userRoles = userdata?.roles;
-
-    if (userRoles && userRoles.length > 0) {
-        const rolesProperties = Object.getOwnPropertyNames(roles)
-        userRoles.sort(function(a, b) {
-            return rolesProperties.indexOf(a) - rolesProperties.indexOf(b);
-        })
-
-        roleHeader.innerText = userRoles.length === 1 ? "Role" : "Roles"
-
-        // List out all the roles
-        for (const roleName of userRoles) {
-            const role = roles[roleName]
-
-            // The surrounding div for the role
-            const roleDiv = popupBody.appendChild(document.createElement("div"))
-            roleDiv.className = role?.css ? role.css : "role_default"
-
-            // The name of the role
-            const roleP = roleDiv.appendChild(document.createElement("p"))
-            roleP.innerText = role.name
-        }
-    } else {
-        roleHeader.innerText = "No Roles"
+    const roleHeader = createDiv("popup_body_header", popupBody, "No Roles");
+    const userRoles = userdata === null || userdata === void 0 ? void 0 : userdata.roles;
+    if (!userRoles || userRoles.length <= 0)
+        return popupDiv;
+    const rolesProperties = Object.getOwnPropertyNames(roles);
+    userRoles.sort((a, b) => rolesProperties.indexOf(a) - rolesProperties.indexOf(b));
+    roleHeader.innerText = userRoles.length === 1 ? "Role" : "Roles";
+    // List out all the roles
+    for (const roleName of userRoles) {
+        const role = roles[roleName];
+        // The surrounding div for the role
+        const roleDiv = createDiv((role === null || role === void 0 ? void 0 : role.css) ? role.css : "role_default", popupBody);
+        // The name of the role
+        create("p", null, roleDiv, role.name);
     }
-
-    return popupDiv
+    return popupDiv;
 }
-
 /**
  * Parses the roles data, creates a stylesheet for each entry, and returns a 'map' of role name -> css class
- * @param roles : object `{[key: string]: Role}`
- * @return Role[]
  */
 function parseRoles(roles) {
     const dynStyle = document.createElement("style");
-    dynStyle.innerText = ""
-    
+    dynStyle.innerText = "";
+    //TODO:
     for (const roleName in roles) {
         let save = false;
-
         const cssKey = "role_custom_" + roleName;
         let css = "." + cssKey + " {\n";
         const role = roles[roleName];
-
         if (role.hasOwnProperty("color")) {
-            css += "color: " + role.color + ";\n"
-            save = true
+            css += "color: " + role.color + ";\n";
+            save = true;
         }
-        css += "}\n"
-
+        css += "}\n";
         if (save) {
-            dynStyle.innerText = css + dynStyle.innerText
-            roles[roleName].css = cssKey
+            dynStyle.innerText = css + dynStyle.innerText;
+            roles[roleName].css = cssKey;
         }
     }
-
-    document.body.appendChild(dynStyle)
-    return roles
+    document.body.appendChild(dynStyle);
+    return roles;
 }
