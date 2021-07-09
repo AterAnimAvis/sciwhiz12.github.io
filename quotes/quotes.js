@@ -1,22 +1,23 @@
 withQuoteData(data => {
     const container = document.getElementById("quotes")
+    const fragment  = document.createDocumentFragment()
     const roles = parseRoles(data.roles);
 
     const quotes = data.quotes;
     for (let i = 0; i < quotes.length; i++) {
         const quote = quotes[i];
-        if (!quote || !quote.user) {
-            container.appendChild(createNoQuote(i + 1))
-        } else {
-            container.appendChild(createQuote(data, roles, i + 1, quote))
-        }
+        const hasNoUser = !quote || !quote.user
+        fragment.appendChild(hasNoUser
+            ? createNoQuote(i + 1)
+            : createQuote(data, roles, i + 1, quote)
+        )
     }
+
+    container.appendChild(fragment)
 
     const counts = document.getElementsByClassName("count")
     for (let i = 0; i < counts.length; i++) {
-        counts[i].addEventListener("click", ev => {
-            removeAllHovers()
-        })
+        counts[i].addEventListener("click", removeAllHovers)
     }
 
     const id = window.location.hash;
@@ -24,15 +25,13 @@ withQuoteData(data => {
     if (id && id.length) {
         const element = document.getElementById(id.substr(1))
         if (element) {
-            element.scrollIntoView({
-                behavior: "smooth"
-            })
+            element.scrollIntoView({ behavior: "smooth" })
             element.classList.add("hover")
         }
     }
 })
 
-window.addEventListener("hashchange", ev => { removeAllHovers() })
+window.addEventListener("hashchange", removeAllHovers)
 
 function removeAllHovers() {
     const elements = document.getElementsByClassName("hover")

@@ -17,7 +17,7 @@ function createPopup(user, roles, userdata) {
     // Part of the popup head, the user's avatar
     const avatar = popupHead.appendChild(document.createElement("img"))
     avatar.className = "popup_avatar"
-    //TODO: avatar.src = userdata?.avatar
+    avatar.src = userdata?.avatar
     avatar.alt = "avatar for " + user
 
     // An optional tag, attached to the name of the user (such as for bots)
@@ -124,9 +124,8 @@ function parseRoles(roles) {
         roles[roleName].css = cssKey
     }
 
-    const dynStyle = document.createElement("style");
+    const dynStyle = document.body.appendChild(document.createElement("style"));
     dynStyle.innerText = style
-    document.body.appendChild(dynStyle)
     return roles
 }
 

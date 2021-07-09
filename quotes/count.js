@@ -2,9 +2,11 @@ withQuoteData(data => {
     const roles = parseRoles(data.roles);
     const counts = calculateCounts(data.quotes);
     const table = document.getElementById("counts");
-    for (const entry of counts) {
-        table.appendChild(addRow(data, roles, entry[0], entry[1]))
-    }
+    const fragment = document.createDocumentFragment();
+
+    for (const entry of counts) fragment.appendChild(addRow(data, roles, entry[0], entry[1]));
+
+    table.appendChild(fragment);
 })
 
 /**
