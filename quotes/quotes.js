@@ -1,43 +1,36 @@
-fetch("data.json")
-    .then(req => req.json())
-    .then(/** @param data : Quotes */ data => {
-        const container = document.getElementById("quotes")
-        const roles = parseRoles(data.roles);
+withQuoteData(data => {
+    const container = document.getElementById("quotes")
+    const roles = parseRoles(data.roles);
 
-        const quotes = data.quotes;
-        for (let i = 0; i < quotes.length; i++) {
-            const quote = quotes[i];
-            if (!quote || !quote.user) {
-                container.appendChild(createNoQuote(i + 1))
-            } else {
-                container.appendChild(createQuote(data, roles, i + 1, quote))
-            }
+    const quotes = data.quotes;
+    for (let i = 0; i < quotes.length; i++) {
+        const quote = quotes[i];
+        if (!quote || !quote.user) {
+            container.appendChild(createNoQuote(i + 1))
+        } else {
+            container.appendChild(createQuote(data, roles, i + 1, quote))
         }
+    }
 
-        const counts = document.getElementsByClassName("count")
-        for (let i = 0; i < counts.length; i++) {
-            counts[i].addEventListener("click", ev => {
-                removeAllHovers()
+    const counts = document.getElementsByClassName("count")
+    for (let i = 0; i < counts.length; i++) {
+        counts[i].addEventListener("click", ev => {
+            removeAllHovers()
+        })
+    }
+
+    const id = window.location.hash;
+    removeAllHovers()
+    if (id && id.length) {
+        const element = document.getElementById(id.substr(1))
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth"
             })
+            element.classList.add("hover")
         }
-
-        const id = window.location.hash;
-        removeAllHovers()
-        if (id && id.length) {
-            const element = document.getElementById(id.substr(1))
-            if (element) {
-                element.scrollIntoView({
-                    behavior: "smooth"
-                })
-                element.classList.add("hover")
-            }
-        }
-    })
-    .catch(err => {
-        console.error("Error while loading: " + err)
-        document.getElementById("loading_error").style.display = ""
-        throw err
-    })
+    }
+})
 
 window.addEventListener("hashchange", ev => { removeAllHovers() })
 

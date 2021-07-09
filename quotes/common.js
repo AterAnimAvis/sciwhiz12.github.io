@@ -129,3 +129,22 @@ function parseRoles(roles) {
     document.body.appendChild(dynStyle)
     return roles
 }
+
+/**
+ * @callback QuoteCallback
+ * @param quotes : Quotes
+ * @return any
+ */
+
+/**
+ * @param callback : QuoteCallback
+ */
+function withQuoteData(callback) {
+    fetch("data.json")
+        .then(req => req.json())
+        .then(/** @param data : Quotes */ data => callback(data))
+        .catch(err => {
+            console.error("Error while loading: " + err)
+            document.getElementById("loading_error").style.display = ""
+        })
+}

@@ -1,29 +1,22 @@
-fetch("data.json")
-    .then(req => req.json())
-    .then( /** @param data : Quotes */ data => {
-        const roles = parseRoles(data.roles);
-        const counts = calculateCounts(data.quotes);
-        const table = document.getElementById("counts");
-        for (const entry of counts) {
-            addRow(data, roles, table, entry[0], entry[1])
-        }
-    })
-    .catch(err => {
-        console.error("Error while loading: " + err)
-        document.getElementById("loading_error").style.display = ""
-    })
+withQuoteData(data => {
+    const roles = parseRoles(data.roles);
+    const counts = calculateCounts(data.quotes);
+    const table = document.getElementById("counts");
+    for (const entry of counts) {
+        table.appendChild(addRow(data, roles, entry[0], entry[1]))
+    }
+})
 
 /**
  * @param data : Quotes
  * @param roles : RoleRegistry
- * @param parent : Node
  * @param user : string
  * @param count : number
  */
-function addRow(data, roles, parent, user, count) {
+function addRow(data, roles, user, count) {
     const userdata = data.users[user];
 
-    const row = parent.appendChild(document.createElement("tr"))
+    const row = document.createElement("tr")
 
     const username = row.appendChild(document.createElement("td"))
     username.className = "collapse"
@@ -55,6 +48,8 @@ function addRow(data, roles, parent, user, count) {
     const countData = row.appendChild(document.createElement("td"))
     countData.className = "count"
     countData.innerText = count.toString()
+
+    return row
 }
 
 /**
