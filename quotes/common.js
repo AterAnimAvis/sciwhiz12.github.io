@@ -17,7 +17,7 @@ function createPopup(user, roles, userdata) {
     // Part of the popup head, the user's avatar
     const avatar = popupHead.appendChild(document.createElement("img"))
     avatar.className = "popup_avatar"
-    avatar.src = userdata?.avatar
+    //TODO: avatar.src = userdata?.avatar
     avatar.alt = "avatar for " + user
 
     // An optional tag, attached to the name of the user (such as for bots)
@@ -104,40 +104,34 @@ function createPopup(user, roles, userdata) {
  * @return RoleRegistry
  */
 function parseRoles(roles) {
-    const dynStyle = document.createElement("style");
-    dynStyle.innerText = ""
-    
+    let style = ""
+
     for (const roleName in roles) {
-        let save = false;
+        if (!roles.hasOwnProperty(roleName)) continue
+
+        const role = roles[roleName];
+        if (!role.hasOwnProperty("color")) continue
 
         const cssKey = "role_custom_" + roleName;
-        let css = "." + cssKey + " {\n";
-        const role = roles[roleName];
 
-        if (role.hasOwnProperty("color")) {
-            css += "color: " + role.color + ";\n"
-            save = true
-        }
+        let css = ""
+        css += "." + cssKey + " {\n";
+        css += "color: " + role.color + ";\n"
         css += "}\n"
 
-        if (save) {
-            dynStyle.innerText = css + dynStyle.innerText
-            roles[roleName].css = cssKey
-        }
+        style = css + style
+
+        roles[roleName].css = cssKey
     }
 
+    const dynStyle = document.createElement("style");
+    dynStyle.innerText = style
     document.body.appendChild(dynStyle)
     return roles
 }
 
 /**
- * @callback QuoteCallback
- * @param quotes : Quotes
- * @return any
- */
-
-/**
- * @param callback : QuoteCallback
+ * @param callback : {function(Quotes):any}
  */
 function withQuoteData(callback) {
     fetch("data.json")
