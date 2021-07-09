@@ -1,7 +1,7 @@
 /**
  * Creates a Popup for a user
  * @param user : string
- * @param roles : Role[]
+ * @param roles : RoleRegistry
  * @param userdata : User|null
  * @returns {HTMLElement}
  */
@@ -100,8 +100,8 @@ function createPopup(user, roles, userdata) {
 
 /**
  * Parses the roles data, creates a stylesheet for each entry, and returns a 'map' of role name -> css class
- * @param roles : object `{[key: string]: Role}`
- * @return Role[]
+ * @param roles : RoleRegistry
+ * @return RoleRegistry
  */
 function parseRoles(roles) {
     const dynStyle = document.createElement("style");

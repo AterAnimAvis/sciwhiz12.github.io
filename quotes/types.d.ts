@@ -1,9 +1,11 @@
 
 declare type Quotes = {
-    users: { [key:string]:User }
-    roles: { [key:string]:Role }
+    users: UserRegistry
+    roles: RoleRegistry
     quotes: Quote[]
 }
+
+declare type UserRegistry = { [key:string]:User }
 
 declare type User = {
     id: string
@@ -14,6 +16,8 @@ declare type User = {
     tag?: string
     username: string
 }
+
+declare type RoleRegistry = { [key:string]:Role }
 
 declare type Role = {
     name: string

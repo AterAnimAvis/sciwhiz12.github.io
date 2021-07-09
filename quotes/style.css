@@ -43,8 +43,7 @@ header {
     filter: invert(100%) sepia(0%) saturate(3555%) hue-rotate(326deg) brightness(121%) contrast(87%);
     width: 24px;
     float: left;
-    margin: 4px;
-    margin-left: 8px;
+    margin: 4px 4px 4px 8px;
 }
 
 .footer,
@@ -119,7 +118,7 @@ tr {
     color: white;
 }
 
-mention {
+.mention {
     background-color: rgba(114, 137, 218, .1);
     color: #7289da;
     border-radius: 3px;
@@ -128,7 +127,7 @@ mention {
     position: relative;
 }
 
-mention:hover {
+.mention:hover {
     color: #fff;
     background-color: #7289da;
 }

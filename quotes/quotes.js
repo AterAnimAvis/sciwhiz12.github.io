@@ -55,7 +55,7 @@ function removeAllHovers() {
 function createNoQuote(number) {
     const quoteDiv = document.createElement("div")
     quoteDiv.className = "quote"
-    quoteDiv.id = number
+    quoteDiv.id = number.toString()
 
     const numberElement = quoteDiv.appendChild(document.createElement("a"))
     numberElement.className = "count"
@@ -76,7 +76,7 @@ function createNoQuote(number) {
 
 /**
  * @param data : Quotes
- * @param roles : Role[]
+ * @param roles : RoleRegistry
  * @param number : number
  * @param quote : Quote
  * @return {HTMLElement}
@@ -91,7 +91,7 @@ function createQuote(data, roles, number, quote) {
 
     const quoteDiv = document.createElement("div")
     quoteDiv.className = "quote"
-    quoteDiv.id = number
+    quoteDiv.id = number.toString()
 
     const numberElement = quoteDiv.appendChild(document.createElement("a"))
     numberElement.className = "count"

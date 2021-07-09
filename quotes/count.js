@@ -15,7 +15,7 @@ fetch("data.json")
 
 /**
  * @param data : Quotes
- * @param roles : Role[]
+ * @param roles : RoleRegistry
  * @param parent : Node
  * @param user : string
  * @param count : number
@@ -54,7 +54,7 @@ function addRow(data, roles, parent, user, count) {
 
     const countData = row.appendChild(document.createElement("td"))
     countData.className = "count"
-    countData.innerText = count + ""
+    countData.innerText = count.toString()
 }
 
 /**
