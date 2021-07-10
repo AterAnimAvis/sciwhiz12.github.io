@@ -1,5 +1,7 @@
 withQuoteData(data => {
-    const roles = parseRoles(data.roles);
+    const roles = data.roles;
+    injectStyleSheet(parseRoles(roles));
+
     const counts = calculateCounts(data.quotes);
     const table = document.getElementById("counts");
     const fragment = document.createDocumentFragment();

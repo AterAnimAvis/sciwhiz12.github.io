@@ -10,7 +10,7 @@ function createPopup(user, roles, userdata) {
     const popupDiv = document.createElement("div")
     popupDiv.className = "popup"
 
-    // The top part of the poppup, for the user's info (name, discriminator, etc)
+    // The top part of the popup, for the user's info (name, discriminator, etc)
     const popupHead = popupDiv.appendChild(document.createElement("div"))
     popupHead.className = "popup_head"
 
@@ -99,7 +99,7 @@ function createPopup(user, roles, userdata) {
 }
 
 /**
- *
+ * Creates the basic Username/Nickname display for a user
  * @param parent : Node
  * @param userdata : User
  * @param roles : RoleRegistry
@@ -132,9 +132,9 @@ function createQuotee(parent, userdata, roles, user) {
 }
 
 /**
- * Parses the roles data, creates a stylesheet for each entry, and returns a 'map' of role name -> css class
+ * Parses the roles data, creating a stylesheet for each entry and returning the overall style
  * @param roles : RoleRegistry
- * @return RoleRegistry
+ * @return string
  */
 function parseRoles(roles) {
     let style = ""
@@ -157,12 +157,20 @@ function parseRoles(roles) {
         roles[roleName].css = cssKey
     }
 
-    const dynStyle = document.body.appendChild(document.createElement("style"));
-    dynStyle.innerText = style
-    return roles
+    return style
 }
 
 /**
+ * Injects a style into the current page
+ * @param style : string
+ */
+function injectStyleSheet(style) {
+    const dynStyle = document.body.appendChild(document.createElement("style"));
+    dynStyle.innerText = style
+}
+
+/**
+ * Loads the current Quote data and calls the callback with it
  * @param callback : {function(Quotes):any}
  */
 function withQuoteData(callback) {

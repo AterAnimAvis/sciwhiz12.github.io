@@ -7,7 +7,8 @@ withQuoteData(data => {
 
     const container = document.getElementById("quotes")
     const fragment  = document.createDocumentFragment()
-    const roles = parseRoles(data.roles);
+    const roles = data.roles;
+    injectStyleSheet(parseRoles(roles));
 
     const quotes = data.quotes;
     for (let i = 0; i < quotes.length; i++) {
@@ -21,10 +22,11 @@ withQuoteData(data => {
 
     container.appendChild(fragment)
 
-    const counts = document.getElementsByClassName("count")
-    for (let i = 0; i < counts.length; i++) {
-        counts[i].addEventListener("click", removeAllHovers)
-    }
+    setupHovers()
+})
+
+function setupHovers() {
+    forAllElementsWithClassName("count", element => element.addEventListener("click", removeAllHovers))
 
     const id = window.location.hash;
     removeAllHovers()
@@ -35,15 +37,22 @@ withQuoteData(data => {
             element.classList.add("hover")
         }
     }
-})
+}
+
+function removeAllHovers() {
+    forAllElementsWithClassName("hover", element => element.classList.remove("hover"))
+}
 
 window.addEventListener("hashchange", removeAllHovers)
 
-function removeAllHovers() {
-    const elements = document.getElementsByClassName("hover")
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].classList.remove("hover");
-    }
+/**
+ *
+ * @param className : string
+ * @param consumer : {function(HTMLElement):any}
+ */
+function forAllElementsWithClassName(className, consumer) {
+    const elements = document.getElementsByClassName(className)
+    for (const element of elements) consumer(element)
 }
 
 /**
