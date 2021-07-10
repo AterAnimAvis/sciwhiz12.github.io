@@ -24,28 +24,8 @@ function addRow(data, roles, user, count) {
     username.className = "collapse"
     username.tabIndex = 1
 
-    const userSpan = username.appendChild(document.createElement("span"))
-    userSpan.innerHTML = userdata ? (userdata.hasOwnProperty("nickname") ? userdata.nickname : userdata.username) : user
-
-    if (userdata) {
-        const userRoles = userdata.roles
-        if (userRoles && userRoles.length > 0) {
-            userRoles.forEach(roleName => {
-                if (roles[roleName]?.css) {
-                    userSpan.classList.add(roles[roleName].css)
-                }
-            });
-        }
-        if (userdata.hasOwnProperty("tag")) {
-            const tagSpan = username.appendChild(document.createElement("span"))
-            tagSpan.className = "tag"
-            tagSpan.innerHTML = userdata.tag
-        }
-
-        username.appendChild(createPopup(user, roles, userdata))
-    } else {
-        userSpan.className = "non_user"
-    }
+    const userSpan = createQuotee(username, userdata, roles, user)
+    if (userdata) userSpan.appendChild(createPopup(user, roles, userdata))
 
     const countData = row.appendChild(document.createElement("td"))
     countData.className = "count"

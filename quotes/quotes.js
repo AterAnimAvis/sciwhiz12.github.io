@@ -1,4 +1,10 @@
 withQuoteData(data => {
+    // We disable the popups if the useragent contains `Mobi` or a `?mobile` is present in the url
+    const isMobile = /Mobi/.test(window.navigator.userAgent) || /Mobile/i.test(window.location.search)
+    // On my test device:
+    // With Popups enabled roughly ~275 quotes can load without causing a crash
+    // With them disabled at least 1300 quotes can load
+
     const container = document.getElementById("quotes")
     const fragment  = document.createDocumentFragment()
     const roles = parseRoles(data.roles);
@@ -9,7 +15,7 @@ withQuoteData(data => {
         const hasNoUser = !quote || !quote.user
         fragment.appendChild(hasNoUser
             ? createNoQuote(i + 1)
-            : createQuote(data, roles, i + 1, quote)
+            : createQuote(data, roles, i + 1, quote, !isMobile)
         )
     }
 
@@ -71,9 +77,10 @@ function createNoQuote(number) {
  * @param roles : RoleRegistry
  * @param number : number
  * @param quote : Quote
+ * @param addPopups : boolean
  * @return {HTMLElement}
  */
-function createQuote(data, roles, number, quote) {
+function createQuote(data, roles, number, quote, addPopups) {
     const user = quote.user
     const text = quote.text
     let userdata = null;
@@ -104,27 +111,8 @@ function createQuote(data, roles, number, quote) {
     nameDiv.className = userdata ? "collapse-name name" : "name"
     nameDiv.tabIndex = 1
 
-    const userSpan = nameDiv.appendChild(document.createElement("span"))
-    userSpan.innerHTML = userdata ? (userdata.hasOwnProperty("nickname") ? userdata.nickname : userdata.username) : user
-    if (userdata) {
-        const userRoles = userdata.roles
-        if (userRoles && userRoles.length > 0) {
-            userRoles.forEach(roleName => {
-                if (roles[roleName]?.css) {
-                    userSpan.classList.add(roles[roleName].css)
-                }
-            });
-        }
-        if (userdata.hasOwnProperty("tag")) {
-            const tagSpan = nameDiv.appendChild(document.createElement("span"))
-            tagSpan.className = "tag"
-            tagSpan.innerHTML = userdata.tag
-        }
-
-        content.appendChild(createPopup(user, roles, userdata))
-    } else {
-        userSpan.className = "non_user"
-    }
+    createQuotee(nameDiv, userdata, roles, user);
+    if (userdata && addPopups) content.appendChild(createPopup(user, roles, userdata))
 
     if (quote.hasOwnProperty("side_text")) {
         content.appendChild(document.createTextNode(" "))

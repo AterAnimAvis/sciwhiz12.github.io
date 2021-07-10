@@ -99,6 +99,39 @@ function createPopup(user, roles, userdata) {
 }
 
 /**
+ *
+ * @param parent : Node
+ * @param userdata : User
+ * @param roles : RoleRegistry
+ * @param user : string
+ * @return HTMLElement
+ */
+function createQuotee(parent, userdata, roles, user) {
+    const userSpan = parent.appendChild(document.createElement("span"))
+    userSpan.innerHTML = userdata ? (userdata.hasOwnProperty("nickname") ? userdata.nickname : userdata.username) : user
+
+    if (userdata) {
+        const userRoles = userdata.roles
+        if (userRoles && userRoles.length > 0) {
+            userRoles.forEach(roleName => {
+                if (roles[roleName]?.css) {
+                    userSpan.classList.add(roles[roleName].css)
+                }
+            });
+        }
+        if (userdata.hasOwnProperty("tag")) {
+            const tagSpan = parent.appendChild(document.createElement("span"))
+            tagSpan.className = "tag"
+            tagSpan.innerHTML = userdata.tag
+        }
+    } else {
+        userSpan.className = "non_user"
+    }
+
+    return userSpan
+}
+
+/**
  * Parses the roles data, creates a stylesheet for each entry, and returns a 'map' of role name -> css class
  * @param roles : RoleRegistry
  * @return RoleRegistry
